@@ -1,3 +1,8 @@
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Map;
+import java.util.Map.Entry;
+
 class Alumno{
 	private String nombre;
 	private int edad;
@@ -45,11 +50,35 @@ class Alumno{
 	
 	
 }
+class ListaAlumno{
+	Map<Integer, Alumno> mapa=new HashMap<>();
+	Scanner entrada=new Scanner(System.in);
+	
+	public void llenarMapa(int num) {
+		System.out.println("Ingresa los siguientes datos:");
+		System.out.println("Nombre del alumno");
+		String nom=entrada.nextLine();
+		System.out.println("Edad del alumno");
+		int edad=entrada.nextInt();
+		entrada.nextLine();
+		System.out.println("Carrea del alumno:");
+		String carrera=entrada.nextLine().toUpperCase().replace(" ","");
+		System.out.println("Fecha de inscripcion en formato dd/mm/aaaa");
+		String fecha=entrada.nextLine();
+		Alumno alumno=new Alumno(nom, edad, carrera, fecha);
+		
+		mapa.put(num,alumno);
+	}
+}
 public class PruebaHashMap {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Scanner entrada=new Scanner(System.in);
+		String op="";
+		int x=1;
+		Map<String, Alumno> mapa=new HashMap<>();
+		ListaAlumno map=new ListaAlumno();
+		map.llenarMapa(x);
 	}
 
 }
