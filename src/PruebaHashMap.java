@@ -2,6 +2,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 class Alumno{
 	private String nombre;
@@ -96,6 +99,34 @@ class ListaAlumno{
 			}
 		}
 	}
+	public double promedioEdades() {
+		double suma=0.0;
+		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
+			suma=suma+alum.getValue().getEdad();
+		}
+		return suma/mapa.size();
+	}
+	public void mostrarAlumnosInscritosdespuesFecha() {
+		SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy");
+		Date comparar = null;
+		try {
+			comparar = formato.parse("10/08/2016");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		System.out.println("Alumnos que se inscribieron despues de 10/08/2016: ");
+		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
+			try {
+				Date fecha=formato.parse(alum.getValue().getFechaInscripcion());
+				if(fecha.before(comparar)==false) {
+					System.out.println(alum.getValue().getNombre());
+				}
+			} catch (ParseException e) {
+				
+			}
+			
+		}
+	}
 }
 public class PruebaHashMap {
 
@@ -116,6 +147,8 @@ public class PruebaHashMap {
 		op2=entrada.nextInt();
 		map.mostrarAlumnosCarrera(op2);
 		entrada.nextLine();
+		map.promedioEdades();
+		map.mostrarAlumnosInscritosdespuesFecha();
 	}
 
 }
