@@ -59,14 +59,14 @@ class ListaAlumno{
 	
 	public void llenarMapa(int num) {
 		System.out.println("Ingresa los siguientes datos:");
-		System.out.println("Nombre del alumno");
+		System.out.println("Nombre del alumno: ");
 		String nom=entrada.nextLine();
-		System.out.println("Edad del alumno");
+		System.out.println("Edad del alumno: ");
 		int edad=entrada.nextInt();
 		entrada.nextLine();
-		System.out.println("Carrea del alumno:");
+		System.out.println("Carrera del alumno: ");
 		String carrera=entrada.nextLine().toUpperCase().replace(" ","");
-		System.out.println("Fecha de inscripcion en formato dd/mm/aaaa");
+		System.out.println("Fecha de inscripcion en formato dd/mm/aaaa: ");
 		String fecha=entrada.nextLine();
 		Alumno alumno=new Alumno(nom, edad, carrera, fecha);
 		
@@ -84,7 +84,7 @@ class ListaAlumno{
 		}else if(op==5) {
 			carrera="CP";
 		}
-		System.out.println("Lista de alumnos que se inscribieron a la carrera "+carrera);
+		System.out.println("Lista de alumnos que se inscribieron a la carrera:  "+carrera);
 		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
 			if(alum.getValue().getCarrera().equalsIgnoreCase("ISC") && op==1) {
 				System.out.println(alum.getValue().getNombre());
@@ -136,19 +136,56 @@ public class PruebaHashMap {
 		int x=1;
 		Map<String, Alumno> mapa=new HashMap<>();
 		ListaAlumno map=new ListaAlumno();
-		map.llenarMapa(x);
-		int op2=0;
-		System.out.println("Cual carrera quieres mostrar:");
-		System.out.println("1) ISC");
-		System.out.println("2) IIA");
-		System.out.println("3) IM");
-		System.out.println("4) LA");
-		System.out.println("5) CP");
-		op2=entrada.nextInt();
-		map.mostrarAlumnosCarrera(op2);
-		entrada.nextLine();
-		map.promedioEdades();
-		map.mostrarAlumnosInscritosdespuesFecha();
+		do {
+		System.out.println("Elige la opcion que necesites");
+		System.out.println("A) Llenar lista (llenar el HashMap)");
+		System.out.println("B) Vaciar lista");
+		System.out.println("C) Mostrar alumnos por carrera");
+		System.out.println("D) Calcular promedio edades");
+		System.out.println("E) Mostrar los alumnos que se inscribieron después de la fecha indicada (10/08/2016)");
+		System.out.println("F) Salir");
+		op=entrada.nextLine().toUpperCase().replace(" ","");
+		switch (op) {
+		case "A":
+			map.llenarMapa(x);
+			x++;
+			break;
+		case "B":
+			map.mapa.clear();
+			System.out.println("Listas vacias");
+			break;
+		case"C":
+			int op2=0;
+			System.out.println("Que quieres mostrar:");
+			System.out.println("1) ISC");
+			System.out.println("2) IIA");
+			System.out.println("3) IM");
+			System.out.println("4) LA");
+			System.out.println("5) CP");
+			try {
+			op2=entrada.nextInt();
+			map.mostrarAlumnosCarrera(op2);
+			entrada.nextLine();
+			}catch (NumberFormatException e) {
+				System.out.println("No es una opcion");
+			}
+			break;
+		case "D":
+			System.out.println("El promedio de las edades es: "+map.promedioEdades());
+			break;
+		case "E":
+			map.mostrarAlumnosInscritosdespuesFecha();
+			break;
+		case "F":
+			System.out.println("Fin del programa");
+			break;
+		default:
+			System.out.println("Opcion NO valida");
+			break;
+			}
+		}while(!op.equalsIgnoreCase("F"));
+
 	}
+	
 
 }
