@@ -69,6 +69,33 @@ class ListaAlumno{
 		
 		mapa.put(num,alumno);
 	}
+	public void mostrarAlumnosCarrera(int op) {
+		String carrera = null;
+		if(op==1) {carrera="ISC";
+		}else if(op==2) {
+			carrera="IIA";
+		}else if(op==3) {
+			carrera="IM";
+		}else if(op==4) {
+			carrera="LA";
+		}else if(op==5) {
+			carrera="CP";
+		}
+		System.out.println("Lista de alumnos que se inscribieron a la carrera "+carrera);
+		for (Entry<Integer, Alumno> alum : mapa.entrySet()) {
+			if(alum.getValue().getCarrera().equalsIgnoreCase("ISC") && op==1) {
+				System.out.println(alum.getValue().getNombre());
+			}else if(alum.getValue().getCarrera().equalsIgnoreCase("IIA") &&op==2) {
+				System.out.println(alum.getValue().getNombre());
+			}else if(alum.getValue().getCarrera().equalsIgnoreCase("IM") &&op==3) {
+				System.out.println(alum.getValue().getNombre());
+			}else if(alum.getValue().getCarrera().equalsIgnoreCase("LA") &&op==4) {
+				System.out.println(alum.getValue().getNombre());
+			}else if(alum.getValue().getCarrera().equalsIgnoreCase("CP") &&op==5) {
+				System.out.println(alum.getValue().getNombre());
+			}
+		}
+	}
 }
 public class PruebaHashMap {
 
@@ -79,6 +106,16 @@ public class PruebaHashMap {
 		Map<String, Alumno> mapa=new HashMap<>();
 		ListaAlumno map=new ListaAlumno();
 		map.llenarMapa(x);
+		int op2=0;
+		System.out.println("Cual carrera quieres mostrar:");
+		System.out.println("1) ISC");
+		System.out.println("2) IIA");
+		System.out.println("3) IM");
+		System.out.println("4) LA");
+		System.out.println("5) CP");
+		op2=entrada.nextInt();
+		map.mostrarAlumnosCarrera(op2);
+		entrada.nextLine();
 	}
 
 }
